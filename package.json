@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "chat-app",
-  "description": "Chat application for mobil",
+  "description": "Chat application for mobile",
   "version": "1.0.0",
   "author": "Péter Kun <kunpet91@gmail.com>",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
