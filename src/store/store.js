@@ -5,8 +5,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     nickName: 'Anon',
-    settingsWidth: 640,
-    settingsHeight: 480,
+    photoWidth: 800,
+    photoHeight: 600,
+    carouselWidth: 100,
+    carouselHeight: 100,
     images: [],
     activeIndex: 0
   },
@@ -20,11 +22,17 @@ export default new Vuex.Store({
     updateActiveIndex(state, index) {
       state.activeIndex = index;
     },
-    updateSettingsWidth(state, width) {
-      state.settingsWidth = width;
+    updatePhotoWidth(state, width) {
+      state.photoWidth = width;
     },
-    updateSettingsHeight(state, height) {
-      state.settingsHeight = height;
-    }       
+    updatePhotoHeight(state, height) {
+      state.photoHeight = height;
+    },
+    updateCarouselWidth(state, width) {
+      state.carouselWidth = width;
+    },
+    updateCarouselHeight(state, height) {
+      state.carouselHeight = height;
+    }      
   }
 })

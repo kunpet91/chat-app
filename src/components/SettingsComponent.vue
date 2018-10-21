@@ -1,11 +1,13 @@
 <template>
   <div class="settings">
+
     <div class="settings__accordion">
       <h4 class="settings__accordion__title"
-          v-on:click="togglePhotoSettings">Photo settings</h4>
+          v-on:click="togglePhotoSettings">Photo size settings</h4>
       <div class="settings__accordion__content" v-show="photoSettingsVisible">
         <p class="settings__accordion__content__text">Width: <span class="settings__accordion__content__text__inner">{{imageWidth}}px</span></p>
-        <vue-slider v-model="imageWidth" v-bind:min="minImageDimension"
+        <vue-slider v-model="imageWidth"
+                    v-bind:min="minImageDimension"
                     v-bind:max="maxImageDimension"
                     tooltip=false></vue-slider>
          <p class="settings__accordion__content__text">Height: <span class="settings__accordion__content__text__inner">{{imageHeight}}px</span></p>
@@ -15,6 +17,7 @@
                     tooltip=false></vue-slider>    
       </div>  
     </div>
+
     <div class="settings__accordion">
       <h4 class="settings__accordion__title"
           v-on:click="toggleChatSettings">Chat settings</h4>
@@ -26,7 +29,24 @@
                v-on:blur="onBlur">
         
       </div>
-    </div>  
+    </div>
+
+    <div class="settings__accordion">
+      <h4 class="settings__accordion__title"
+          v-on:click="togglePhotoSettings">Carousel size settings</h4>
+      <div class="settings__accordion__content" v-show="carouselSettingsVisible">
+        <p class="settings__accordion__content__text">Width: <span class="settings__accordion__content__text__inner">{{carouselWidth}}%</span></p>
+        <vue-slider v-model="carouselWidth"
+                    v-bind:min=50
+                    v-bind:max=100
+                    tooltip=false></vue-slider>
+         <p class="settings__accordion__content__text">Height: <span class="settings__accordion__content__text__inner">{{carouselHeight}}%</span></p>
+        <vue-slider v-model="carouselHeight"
+                    v-bind:min=50
+                    v-bind:max=100
+                    tooltip=false></vue-slider>    
+      </div>  
+    </div>      
   </div>
 </template>
 
@@ -43,12 +63,15 @@ export default {
     return {
       minImageDimension: 200,
       maxImageDimension: 2000,
-      imageWidth:  this.$store.state.settingsWidth,
-      imageHeight: this.$store.state.settingsHeight,
+      imageWidth:  this.$store.state.photoWidth,
+      imageHeight: this.$store.state.photoHeight,
+      carouselWidth:  this.$store.state.carouselWidth,
+      carouselHeight: this.$store.state.carouselHeight,      
       nickName: this.$store.state.nickName,
       nameModel: '',
       photoSettingsVisible: true,
-      chatSettingsVisible: true
+      chatSettingsVisible: true,
+      carouselSettingsVisible: true
     }
   },
   methods: {
@@ -58,6 +81,9 @@ export default {
     toggleChatSettings() {
       this.chatSettingsVisible = !this.chatSettingsVisible;
     },
+    toggleCarouselSettings() {
+      this.carouselSettingsVisible = !this.carouselSettingsVisible;
+    },    
     onBlur() {
       this.nickName = this.nameModel;
       this.nameModel = '';
@@ -66,11 +92,17 @@ export default {
   },
   watch: {
   	'imageWidth': function(newVal) {
-      this.$store.commit('updateSettingsWidth', newVal);
+      this.$store.commit('updatePhotoWidth', newVal);
     },
     'imageHeight': function(newVal) {
-      this.$store.commit('updateSettingsHeight', newVal);
-    }
+      this.$store.commit('updatePhotoHeight', newVal);
+    },
+  	'carouselWidth': function(newVal) {
+      this.$store.commit('updateCarouselWidth', newVal);
+    },
+    'carouselHeight': function(newVal) {
+      this.$store.commit('updateCarouselHeight', newVal);
+    }    
   }
 }
 </script>

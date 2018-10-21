@@ -1,16 +1,19 @@
 <template>
-  <div class="photo-container"
+  <div class="photos"
        v-touch:swipe.left="onNextImage"
        v-touch:swipe.right="onPrevImage">
-    <div class="photo-container__item" v-for="image in images" :key="image.id"
-         v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
-      <img class="photo-container__item__img" v-bind:src="image.src"/>
-    </div>
-    <a class="arrow arrow--left" role="button"
-       v-on:click="onPrevImage"
-       v-if="activeIndex > 0"></a>
-    <a class="arrow arrow--right" role="button"
-       v-on:click="onNextImage"></a>
+    <div class="photos__carousel"
+        v-bind:style="{ width: carouselWidth + '%', height: carouselHeight + '%', top: ((100 - carouselHeight) / 2) + '%'}">
+      <div class="photos__carousel__item" v-for="image in images" :key="image.id"
+          v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
+        <img class="photos__carousel__item__img" v-bind:src="image.src"/>
+      </div>
+      <a class="arrow arrow--left" role="button"
+        v-on:click="onPrevImage"
+        v-if="activeIndex > 0"></a>
+      <a class="arrow arrow--right" role="button"
+        v-on:click="onNextImage"></a>
+    </div>    
   </div>
 </template>
 
@@ -25,10 +28,12 @@ export default {
   name: 'PhotosComponent',
   data() {
     return {
-      width: this.$store.state.settingsWidth,
-      height: this.$store.state.settingsHeight,
+      width: this.$store.state.photoWidth,
+      height: this.$store.state.photoHeight,
       images: this.$store.state.images,
-      activeIndex: this.$store.state.activeIndex
+      activeIndex: this.$store.state.activeIndex,
+      carouselWidth: this.$store.state.carouselWidth,
+      carouselHeight: this.$store.state.carouselHeight
     }
   },
   methods: {
@@ -78,28 +83,37 @@ export default {
 <style lang="scss">
   @import "../scss/_buttons.scss";
   @import "../scss/_mixin.scss";
-  .photo-container {
+  .photos {
     position: relative;
-    height: 100%;
     width: 100%;
-    overflow-x: hidden;
-    &__item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+    height: 100%;
+    &__carousel {
+      position: relative;
+      background-color: #f3f3f3;
       height: 100%;
-      transition: transform 0.3s ease-in-out;
-      &__img {
-        max-width: 100%;
-        max-height: 100%;
-        margin: 0 auto;
-        display: block;
-        @include centerWithAbsolute(true, true);
+      width: 100%;
+      margin: 0 auto;
+      overflow-x: hidden;
+      max-height: 100%;
+      max-width: 100%;
+      &__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+        &__img {
+          max-width: 100%;
+          max-height: 100%;
+          margin: 0 auto;
+          display: block;
+          @include centerWithAbsolute(true, true);
+        }
       }
-    }
-    .arrow {
-      @include centerWithAbsolute(false, true);  
+      .arrow {
+        @include centerWithAbsolute(false, true);  
+      }
     }
   }
 </style>
