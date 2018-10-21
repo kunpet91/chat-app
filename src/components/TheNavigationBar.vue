@@ -39,7 +39,6 @@ export default {
   .navigation {
     width: 100%;
     display: flex;
-    height: 30px;
     &__item {
       height: 100%;
       flex-grow: 1;

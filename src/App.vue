@@ -29,10 +29,11 @@ export default {
     display: flex;
     flex-direction: column;
     &__nav {
-      height: 24px;
+      height: 40px;
     }
     &__view {
       flex: 1;
+      overflow-y: auto;
     }
     &__nav, &__view {
       position: relative;
@@ -184,6 +185,6 @@ export default {
   .clearfix { zoom: 1; }
 
   /* custom part */
-  html, body { width: 100%; height: 100%;}
+  html, body { width: 100%; height: 100%;overflow-y: hidden;}
 
 </style>

@@ -17,14 +17,9 @@
 <script>
 
 import Vue from 'vue'
-import Vuex from 'vuex'
 import Vue2TouchEvents from 'vue2-touch-events'
 
-Vue.use(Vuex)
 Vue.use(Vue2TouchEvents)
-
-// Vuex is used to load data to the component from app state
-// Vue2TouchEvents is used for swipe navigation
 
 export default {
   name: 'PhotosComponent',
@@ -40,10 +35,9 @@ export default {
     getNewImage() {
       this.images.push({
         id: this.images.length,
-        //src: 'https://wallpaperbrowse.com/media/images/750814.jpg',
-        //src: 'http://lorempixel.com/' + this.width + '/' + this.height
+        width: this.width,
+        height: this.height,
         src: 'https://picsum.photos/' + this.width + '/' + this.height + '?image=' + Math.floor(Math.random() * 999)
-        //src: 'https://www.nationalgeographic.com/content/dam/photography/photos/000/000/6.ngsversion.1467942028599.adapt.1900.1.jpg'
       });
     },
     onNextImage() {
@@ -59,7 +53,7 @@ export default {
     },
     transformImages(index) { 
       this.images.forEach(element => {
-        Vue.set(element, 'translateX', (element.id - index) * 100)
+        element.translateX = (element.id - index) * 100;
       });
     },
     onPrevImage() {
