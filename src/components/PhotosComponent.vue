@@ -1,5 +1,7 @@
 <template>
-  <div class="photo-container">
+  <div class="photo-container"
+       v-touch:swipe.left="onNextImage"
+       v-touch:swipe.right="onPrevImage">
     <div class="photo-container__item" v-for="image in images" :key="image.id"
          v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
       <img class="photo-container__item__img" v-bind:src="image.src"/>
@@ -13,10 +15,16 @@
 </template>
 
 <script>
+
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 Vue.use(Vuex)
+Vue.use(Vue2TouchEvents)
+
+// Vuex is used to load data to the component from app state
+// Vue2TouchEvents is used for swipe navigation
 
 export default {
   name: 'PhotosComponent',
