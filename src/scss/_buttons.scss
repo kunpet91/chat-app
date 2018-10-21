@@ -1,0 +1,29 @@
+$buttonBlue: #365899;
+
+.btn {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    outline: none;
+    border: 2px solid black;
+    &--blue {
+        background-color: $buttonBlue;
+        color: white;
+    }
+}
+
+.arrow {
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    cursor: pointer;    
+    &--left {
+        border-right: 15px solid $buttonBlue;
+        left: 5px;
+    }
+    &--right {
+        border-left: 15px solid $buttonBlue;
+        right: 5px;
+    }
+}

@@ -1,7 +1,7 @@
 <template>
   <nav class="navigation">
       <router-link tag="button"
-                   class="navigation__item"
+                   class="navigation__item btn btn--blue"
                    v-for="link in links" 
                    v-bind:key="link.id"
                    :to="`${link.page}`">{{link.text}}</router-link>
@@ -35,19 +35,15 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import "../scss/_buttons.scss";
   .navigation {
     width: 100%;
     display: flex;
     height: 30px;
     &__item {
       height: 100%;
-      text-align: center;
       flex-grow: 1;
       flex-basis: 0;
-      font-size: 14px;
-      font-weight: bold;
-      text-overflow: ellipsis;
-      overflow: hidden;
     }
   }
 </style>

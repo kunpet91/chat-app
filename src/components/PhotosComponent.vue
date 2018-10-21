@@ -1,14 +1,14 @@
 <template>
   <div class="photo-container">
-    <button v-on:click="getNextImage"
-            style="position:absolute;z-index:2;right:0;">Get image</button>
-    <button v-on:click="onPrevImage"
-            v-if="activeIndex > 0"
-            style="position:absolute;z-index:2;">Prev image</button>
     <div class="photo-container__item" v-for="image in images" :key="image.id"
          v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
       <img class="photo-container__item__img" v-bind:src="image.src"/>
     </div>
+    <a class="arrow arrow--left" role="button"
+       v-on:click="onPrevImage"
+       v-if="activeIndex > 0"></a>
+    <a class="arrow arrow--right" role="button"
+       v-on:click="onNextImage"></a>
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
         //src: 'https://www.nationalgeographic.com/content/dam/photography/photos/000/000/6.ngsversion.1467942028599.adapt.1900.1.jpg'
       });
     },
-    getNextImage() {
+    onNextImage() {
       this.activeIndex++;
       if (!this.images[this.activeIndex]) {
         this.getNewImage();
@@ -74,6 +74,8 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import "../scss/_buttons.scss";
+  @import "../scss/_mixin.scss";
   .photo-container {
     position: relative;
     height: 100%;
@@ -91,7 +93,11 @@ export default {
         max-height: 100%;
         margin: 0 auto;
         display: block;
+        @include centerWithAbsolute(true, true);
       }
+    }
+    .arrow {
+      @include centerWithAbsolute(false, true);  
     }
   }
 </style>
