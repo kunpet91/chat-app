@@ -12,6 +12,9 @@ $buttonBlue: #3498db;
         background-color: $buttonBlue;
         color: white;
     }
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .arrow {
@@ -21,11 +24,11 @@ $buttonBlue: #3498db;
     outline: none;
     &--left {
         border-right: 15px solid $buttonBlue;
-        left: 5px;
+        left: 8px;
     }
     &--right {
         border-left: 15px solid $buttonBlue;
-        right: 5px;
+        right: 8px;
     }
     &--top {
         border-bottom: 15px solid $buttonBlue;

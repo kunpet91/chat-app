@@ -18,7 +18,9 @@
             <input type="text" v-model="message"
              class="chat__sender__form__input"
              maxlength=100>
-            <button type="submit" class="btn btn--blue chat__sender__form__btn">Send</button>
+            <button type="submit"
+             class="btn btn--blue chat__sender__form__btn"
+             :disabled="!message">Send</button>
         </form>
     </div>
   </div>
@@ -111,7 +113,6 @@ export default {
         }
         &__btn {
           padding: 0 24px;
-          border-left: 3px solid black;
         }
       }
     }
