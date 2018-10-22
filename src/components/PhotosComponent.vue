@@ -8,11 +8,13 @@
           v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
         <img class="photos__carousel__item__img" v-bind:src="image.src"/>
       </div>
-      <a class="arrow arrow--left" role="button"
-        v-on:click="onPrevImage"
-        v-if="activeIndex > 0"></a>
-      <a class="arrow arrow--right" role="button"
-        v-on:click="onNextImage"></a>
+      <div class="photos__carousel__controls">
+        <a class="arrow arrow--left" role="button"
+          v-on:click="onPrevImage"
+          v-if="activeIndex > 0"></a>
+        <a class="arrow arrow--right" role="button"
+          v-on:click="onNextImage"></a>
+      </div>
     </div>    
   </div>
 </template>
@@ -96,6 +98,20 @@ export default {
       overflow-x: hidden;
       max-height: 100%;
       max-width: 100%;
+      &__controls {
+        position: absolute;
+        @include centerWithAbsolute(false, true); 
+        width: 100%;
+        padding: 8px;
+        .arrow {
+          &--left {
+            float: left;
+          }
+          &--right {
+            float: right;
+          }          
+        }   
+      }
       &__item {
         position: absolute;
         top: 0;
@@ -110,9 +126,6 @@ export default {
           display: block;
           @include centerWithAbsolute(true, true);
         }
-      }
-      .arrow {
-        @include centerWithAbsolute(false, true);  
       }
     }
   }

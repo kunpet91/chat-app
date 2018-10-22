@@ -14,7 +14,7 @@
       </div>      
     </div>
     <div class="chat__sender">
-        <form @submit.prevent="sendMessage" class="chat__sender__form">
+        <form v-on:submit.prevent="sendMessage" class="chat__sender__form">
             <input type="text" v-model="message"
              class="chat__sender__form__input"
              maxlength=100>
@@ -37,7 +37,8 @@ export default {
             user: this.$store.state.nickName,
             message: '',
             messages: [],
-            socket : io('https://frontend-test-server.prmrgt.com/')
+            socket : io('https://frontend-test-server.prmrgt.com/'),
+            chatBoxElement: null
         }
     },
     methods: {
@@ -53,9 +54,16 @@ export default {
             this.socket.emit('message', data);
             this.message = '';
             this.messages = [...this.messages, data];
+          
+            // scroll to the bottom in when new message is sent
+            let chatBoxElement = this.chatBoxElement;
+            setTimeout(() => {
+              chatBoxElement.scrollTop = chatBoxElement.scrollHeight - chatBoxElement.clientHeight; 
+            }, 100);          
         }
     },
     mounted() {
+        this.chatBoxElement = document.querySelector('.chat__box');
         this.socket.on('message', (data) => {
             this.messages = [...this.messages, Object.assign(data, {type: 'received'})];
         });

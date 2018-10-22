@@ -4,7 +4,10 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="togglePhotoSettings">Photo size settings</h4>
+            v-on:click="togglePhotoSettings">Photo size settings
+            <a class="arrow arrow--bottom" role="button"
+               v-bind:class="{'closed': !photoSettingsVisible}"></a>
+        </h4>
         <div class="settings__container__accordion__content" v-show="photoSettingsVisible">
           <p class="settings__container__accordion__content__text">Width: 
             <span class="settings__container__accordion__content__text__inner">{{imageWidth}}px</span>
@@ -25,7 +28,10 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="toggleChatSettings">Chat settings</h4>
+            v-on:click="toggleChatSettings">Chat settings
+            <a class="arrow arrow--bottom" role="button"
+               v-bind:class="{'closed': !chatSettingsVisible}"></a>            
+            </h4>
         <div class="settings__container__accordion__content" v-show="chatSettingsVisible">
           <p class="settings__container__accordion__content__text">Your nickname: 
             <span class="settings__container__accordion__content__text__inner">{{nickName}}</span>
@@ -40,7 +46,10 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="toggleCarouselSettings">Carousel size settings</h4>
+            v-on:click="toggleCarouselSettings">Carousel size settings
+            <a class="arrow arrow--bottom" role="button"
+               v-bind:class="{'closed': !carouselSettingsVisible}"></a>            
+            </h4>            
         <div class="settings__container__accordion__content" v-show="carouselSettingsVisible">
           <p class="settings__container__accordion__content__text">Width: 
             <span class="settings__container__accordion__content__text__inner">{{carouselWidth}}%</span>
@@ -132,9 +141,18 @@ export default {
         padding: 8px;
         margin: 24px 0;
         &__title {
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
+          position: relative;
+          font-size: 24px;
+          font-weight: bold;
+          cursor: pointer;
+          .arrow {
+            position: absolute;
+            right: 12px;
+            transition: transform ease 0.3s;
+            &.closed {
+              transform: rotate(180deg);
+            }
+          }
         }
         &__content {
           padding: 8px;
