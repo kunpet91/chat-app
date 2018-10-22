@@ -32,8 +32,7 @@ export default {
       height: 40px;
     }
     &__view {
-      flex: 1;
-      overflow-y: auto;
+      height: calc(100% - 40px);
     }
     &__nav, &__view {
       position: relative;

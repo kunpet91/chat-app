@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     updateNickName(state, name) {
-      state.userName = name;
+      state.nickName = name;
     },    
     updateImages(state, images) {
       state.images = images;
@@ -33,6 +33,6 @@ export default new Vuex.Store({
     },
     updateCarouselHeight(state, height) {
       state.carouselHeight = height;
-    }      
+    }  
   }
 })

@@ -7,7 +7,7 @@ $buttonBlue: #3498db;
     text-overflow: ellipsis;
     overflow: hidden;
     outline: none;
-    border: 2px solid black;
+    border: none;
     &--blue {
         background-color: $buttonBlue;
         color: white;

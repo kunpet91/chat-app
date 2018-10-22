@@ -43,6 +43,9 @@ export default {
       height: 100%;
       flex-grow: 1;
       flex-basis: 0;
+      &.router-link-exact-active {
+        background-color: #0061a2;
+      }
     }
   }
 </style>

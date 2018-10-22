@@ -1,52 +1,65 @@
 <template>
   <div class="settings">
+    <div class="settings__container">
 
-    <div class="settings__accordion">
-      <h4 class="settings__accordion__title"
-          v-on:click="togglePhotoSettings">Photo size settings</h4>
-      <div class="settings__accordion__content" v-show="photoSettingsVisible">
-        <p class="settings__accordion__content__text">Width: <span class="settings__accordion__content__text__inner">{{imageWidth}}px</span></p>
-        <vue-slider v-model="imageWidth"
-                    v-bind:min="minImageDimension"
-                    v-bind:max="maxImageDimension"
-                    tooltip=false></vue-slider>
-         <p class="settings__accordion__content__text">Height: <span class="settings__accordion__content__text__inner">{{imageHeight}}px</span></p>
-        <vue-slider v-model="imageHeight"
-                    v-bind:min="minImageDimension"
-                    v-bind:max="maxImageDimension"
-                    tooltip=false></vue-slider>    
-      </div>  
-    </div>
-
-    <div class="settings__accordion">
-      <h4 class="settings__accordion__title"
-          v-on:click="toggleChatSettings">Chat settings</h4>
-      <div class="settings__accordion__content" v-show="chatSettingsVisible">
-        <p class="settings__accordion__content__text">Your nickname: <span class="settings__accordion__content__text__inner">{{nickName}}</span></p>
-        <input v-model="nameModel" maxlength="20"
-               class="settings__accordion__content__input"
-               placeholder="Change it here!"
-               v-on:blur="onBlur">
-        
+      <div class="settings__container__accordion">
+        <h4 class="settings__container__accordion__title"
+            v-on:click="togglePhotoSettings">Photo size settings</h4>
+        <div class="settings__container__accordion__content" v-show="photoSettingsVisible">
+          <p class="settings__container__accordion__content__text">Width: 
+            <span class="settings__container__accordion__content__text__inner">{{imageWidth}}px</span>
+          </p>
+          <vue-slider v-model="imageWidth"
+                      v-bind:min="minImageDimension"
+                      v-bind:max="maxImageDimension"
+                      tooltip=false></vue-slider>
+          <p class="settings__container__accordion__content__text">Height: 
+            <span class="settings__container__accordion__content__text__inner">{{imageHeight}}px</span>
+          </p>
+          <vue-slider v-model="imageHeight"
+                      v-bind:min="minImageDimension"
+                      v-bind:max="maxImageDimension"
+                      tooltip=false></vue-slider>    
+        </div>  
       </div>
-    </div>
 
-    <div class="settings__accordion">
-      <h4 class="settings__accordion__title"
-          v-on:click="togglePhotoSettings">Carousel size settings</h4>
-      <div class="settings__accordion__content" v-show="carouselSettingsVisible">
-        <p class="settings__accordion__content__text">Width: <span class="settings__accordion__content__text__inner">{{carouselWidth}}%</span></p>
-        <vue-slider v-model="carouselWidth"
-                    v-bind:min=50
-                    v-bind:max=100
-                    tooltip=false></vue-slider>
-         <p class="settings__accordion__content__text">Height: <span class="settings__accordion__content__text__inner">{{carouselHeight}}%</span></p>
-        <vue-slider v-model="carouselHeight"
-                    v-bind:min=50
-                    v-bind:max=100
-                    tooltip=false></vue-slider>    
-      </div>  
-    </div>      
+      <div class="settings__container__accordion">
+        <h4 class="settings__container__accordion__title"
+            v-on:click="toggleChatSettings">Chat settings</h4>
+        <div class="settings__container__accordion__content" v-show="chatSettingsVisible">
+          <p class="settings__container__accordion__content__text">Your nickname: 
+            <span class="settings__container__accordion__content__text__inner">{{nickName}}</span>
+          </p>
+          <input v-model="nameModel" maxlength="20"
+                class="settings__container__accordion__content__input"
+                placeholder="Change it here!"
+                v-on:blur="onBlur">
+          
+        </div>
+      </div>
+
+      <div class="settings__container__accordion">
+        <h4 class="settings__container__accordion__title"
+            v-on:click="toggleCarouselSettings">Carousel size settings</h4>
+        <div class="settings__container__accordion__content" v-show="carouselSettingsVisible">
+          <p class="settings__container__accordion__content__text">Width: 
+            <span class="settings__container__accordion__content__text__inner">{{carouselWidth}}%</span>
+          </p>
+          <vue-slider v-model="carouselWidth"
+                      v-bind:min=50
+                      v-bind:max=100
+                      tooltip=false></vue-slider>
+          <p class="settings__container__accordion__content__text">Height: 
+            <span class="settings__container__accordion__content__text__inner">{{carouselHeight}}%</span>
+          </p>
+          <vue-slider v-model="carouselHeight"
+                      v-bind:min=50
+                      v-bind:max=100
+                      tooltip=false></vue-slider>    
+        </div>  
+      </div>   
+
+    </div>   
   </div>
 </template>
 
@@ -109,32 +122,36 @@ export default {
 <style lang="scss">
 
   .settings {
-    padding: 0 4%;
-    &__accordion {
-      border: 2px solid #3498db;
-      border-radius: 16px;
-      padding: 8px;
-      margin: 24px 0;
-      &__title {
-       font-size: 24px;
-       font-weight: bold;
-       cursor: pointer;
-      }
-      &__content {
+    overflow-y: auto;
+    height: 100%;
+    &__container {
+      padding: 0 4%;
+      &__accordion {
+        border: 2px solid #3498db;
+        border-radius: 16px;
         padding: 8px;
-        &__text {
-          font-size: 18px;
-          &__inner {
-            color: #3498db;
-          }          
+        margin: 24px 0;
+        &__title {
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
         }
-        &__input {
-          display: block;
-          margin-top: 8px;
-          border: 2px solid #3498db;
-          padding: 4px;
+        &__content {
+          padding: 8px;
+          &__text {
+            font-size: 18px;
+            &__inner {
+              color: #3498db;
+            }          
+          }
+          &__input {
+            display: block;
+            margin-top: 8px;
+            border: 2px solid #3498db;
+            padding: 4px;
+          }
         }
-      }
+      }      
     }
   }
 </style>
