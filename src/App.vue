@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "./scss/_buttons.scss";
   .application {
     height: 100%;
     display: flex;

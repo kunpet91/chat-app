@@ -100,8 +100,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-  @import "../scss/_buttons.scss";
+<style scoped lang="scss">
   @import "../scss/_mixin.scss";
   .photos {
     user-select: none; 

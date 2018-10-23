@@ -46,8 +46,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-  @import "../scss/_buttons.scss";
+<style scoped lang="scss">
   .navigation {
     width: 100%;
     display: flex;

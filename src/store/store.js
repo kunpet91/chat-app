@@ -8,8 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     nickName: 'Anon',
-    photoWidth: 800,
-    photoHeight: 600,
+    photoWidth: 640,
+    photoHeight: 480,
     carouselWidth: 100,
     carouselHeight: 100,
     images: [],

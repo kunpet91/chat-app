@@ -74,7 +74,7 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
   .chat {
     height: 100%;
     display: flex;
