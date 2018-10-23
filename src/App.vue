@@ -8,15 +8,13 @@
 </template>
 
 <script>
+// TheNavigatorBar component is used in the App component, it's always accessable on the top of the page
+// The 3 main components (Chat, Photos, Settings) is loaded into the DOM using router
+
 import TheNavigationBar from './components/TheNavigationBar'
 
 export default {
   name: 'app',
-  data() {
-    return {
-      activeComponent: 'PhotosComponent'
-    }
-  },
   components: {
     'TheNavigationBar': TheNavigationBar
   }

@@ -21,8 +21,16 @@
 
 <script>
 
+// Component data is intiialized from the store.
+// We only need the current values when the component is loaded because they won't change 
+// in the store during photo navigation
+
 import Vue from 'vue'
 import Vue2TouchEvents from 'vue2-touch-events'
+
+// Vue2Touch Events is used for swipe events: 
+// v-touch:swipe.left
+// v-touch:swipe.right
 
 Vue.use(Vue2TouchEvents)
 
@@ -35,18 +43,24 @@ export default {
       images: this.$store.state.images,
       activeIndex: this.$store.state.activeIndex,
       carouselWidth: this.$store.state.carouselWidth,
-      carouselHeight: this.$store.state.carouselHeight
+      carouselHeight: this.$store.state.carouselHeight,
+      photosUrl: 'https://picsum.photos/'
     }
   },
   methods: {
+    // it will push a new photo item into the images array with the given width/height
+    // I used picsum for the photo because the lorempixel was always down
     getNewImage() {
       this.images.push({
         id: this.images.length,
         width: this.width,
         height: this.height,
-        src: 'https://picsum.photos/' + this.width + '/' + this.height + '?image=' + Math.floor(Math.random() * 999)
+        src: this.photosUrl + this.width + '/' + this.height + '?image=' + Math.floor(Math.random() * 999)
       });
     },
+    // navigates to the next photo.
+    // if there isn't, it will load a new one.
+    // after the value changes, it will notify the store.
     onNextImage() {
       this.activeIndex++;
       if (!this.images[this.activeIndex]) {
@@ -58,11 +72,13 @@ export default {
 
       this.transformImages(this.activeIndex);
     },
+    // this function positions the images with translateX using animation from CSS as well
     transformImages(index) { 
       this.images.forEach(element => {
         element.translateX = (element.id - index) * 100;
       });
     },
+    // navigates to the previous photo.
     onPrevImage() {
       if (this.activeIndex === 0) {
         return;
@@ -73,6 +89,8 @@ export default {
       this.transformImages(this.activeIndex);
     }
   },
+  // after the component loaded, get an image if we don't have.
+  // if we do, position them correctly
   mounted() {
     if (!this.images.length) {
       this.getNewImage();
