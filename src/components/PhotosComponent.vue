@@ -4,6 +4,7 @@
        v-touch:swipe.right="onPrevImage">
     <div class="photos__carousel"
         v-bind:style="{ width: carouselWidth + '%', height: carouselHeight + '%', top: ((100 - carouselHeight) / 2) + '%'}">
+      <div class="spinner"></div>
       <div class="photos__carousel__item" v-for="image in images" :key="image.id"
           v-bind:style="{ transform: 'translateX('+ image.translateX + '%)'}">
         <img class="photos__carousel__item__img" v-bind:src="image.src"/>
@@ -116,7 +117,14 @@ export default {
       overflow-x: hidden;
       max-height: 100%;
       max-width: 100%;
+      .spinner {
+        z-index: 1;
+        opacity: 0.7;
+        @include centerWithAbsolute(true, true);
+        transform: none;
+      }      
       &__controls {
+        z-index: 3;
         position: absolute;
         @include centerWithAbsolute(false, true); 
         width: 100%;
@@ -131,6 +139,7 @@ export default {
         }   
       }
       &__item {
+        z-index: 2;
         position: absolute;
         top: 0;
         left: 0;

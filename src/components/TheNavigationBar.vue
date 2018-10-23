@@ -11,6 +11,7 @@
 </template>
 
 <script>
+// the component stores the paths for the tabs
 export default {
   name: 'TheNavigationBar',
   data() {
@@ -35,14 +36,16 @@ export default {
     }
   },
   methods: {
+    // sets the active tab in the store
     onTabClick(tab) {
       this.$store.commit('setActiveTab', tab);
     }
   },
   computed: {
-      hasNewMessage() {
-        return this.$store.state.hasNewMessage;
-      }
+    // get information from the store if there is a new message notification
+    hasNewMessage() {
+      return this.$store.state.hasNewMessage;
+    }
   }
 }
 </script>
@@ -54,6 +57,7 @@ export default {
       height: 100%;
       flex-grow: 1;
       flex-basis: 0;
+      border: 1px solid #0061a2;
       &.router-link-exact-active {
         background-color: #0061a2;
       }

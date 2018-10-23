@@ -4,7 +4,7 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="toggleAccordion('photo')">Photo size settings
+            v-on:click="onToggleAccordion('photo')">Photo size settings
             <a class="arrow arrow--bottom" role="button"
                v-bind:class="{'closed': !photoSettingsVisible}"></a>
         </h4>
@@ -28,7 +28,7 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="toggleAccordion('chat')">Chat settings
+            v-on:click="onToggleAccordion('chat')">Chat settings
             <a class="arrow arrow--bottom" role="button"
                v-bind:class="{'closed': !chatSettingsVisible}"></a>            
             </h4>
@@ -46,7 +46,7 @@
 
       <div class="settings__container__accordion">
         <h4 class="settings__container__accordion__title"
-            v-on:click="toggleAccordion('carousel')">Carousel size settings
+            v-on:click="onToggleAccordion('carousel')">Carousel size settings
             <a class="arrow arrow--bottom" role="button"
                v-bind:class="{'closed': !carouselSettingsVisible}"></a>            
             </h4>            
@@ -76,6 +76,7 @@
 
 import vueSlider from 'vue-slider-component';
 
+// the component stores data for the carousel settings, the photo settings and for the user name
 export default {
   name: 'SettingsComponent',
   components: {
@@ -100,7 +101,7 @@ export default {
   },
   methods: {
     // toggle function for the 3 section
-    toggleAccordion(value) {
+    onToggleAccordion(value) {
       switch (value) {
         case 'photo': 
           this.photoSettingsVisible = !this.photoSettingsVisible;
@@ -113,8 +114,12 @@ export default {
           break;                    
       }
     },
-    // method when the nickname input field loses focus
-    onBlur() {
+    // update nickname if the input field wasn't empty on blur
+    onBlur(e) {
+      if (!e.target.value) {
+        return;
+      }
+
       this.nickName = this.nameModel;
       this.nameModel = '';
       this.$store.commit('updateNickName', this.nickName);
@@ -155,6 +160,7 @@ export default {
           position: relative;
           font-size: 24px;
           font-weight: bold;
+          color: #797979;
           cursor: pointer;
           .arrow {
             position: absolute;
@@ -169,6 +175,7 @@ export default {
           padding: 8px;
           &__text {
             font-size: 18px;
+            color: #797979;
             &__inner {
               color: #3498db;
             }          
@@ -178,6 +185,7 @@ export default {
             margin-top: 8px;
             border: 2px solid #3498db;
             padding: 4px;
+            border-radius: 8px;
           }
         }
       }      

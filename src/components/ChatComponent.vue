@@ -14,7 +14,7 @@
       </div>      
     </div>
     <div class="chat__sender">
-        <form v-on:submit.prevent="sendMessage" class="chat__sender__form">
+        <form v-on:submit.prevent="onSendMessage" class="chat__sender__form">
             <input type="text" v-model="message"
              class="chat__sender__form__input"
              maxlength=100>
@@ -29,6 +29,7 @@
 <script>
 
 export default {
+  // this component is loading the messages and send new messages using the store
   name: 'ChatComponent',
     data() {
         return {
@@ -38,12 +39,14 @@ export default {
         }
     },
     computed: {
+      // messages from the store
       messages() {
         return this.$store.state.messages;
       }
     },
     methods: {
-        sendMessage() {
+        // sends a new message using the store
+        onSendMessage() {
             const data = {
                 user: this.user,
                 message: this.message,
@@ -65,7 +68,7 @@ export default {
         }
     },
     mounted() {
-        // set flag to false when chat is loaded
+        // set flag to false when chat component is mounted
         this.$store.commit('setHasNewMessage', false);
       
         this.chatBoxElement = document.querySelector('.chat__box');
@@ -109,6 +112,7 @@ export default {
           }
           &__user, &__text {
             font-size: 18px;
+            color: #353535;
           }
         }
       }
