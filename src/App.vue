@@ -17,6 +17,10 @@ export default {
   name: 'app',
   components: {
     'TheNavigationBar': TheNavigationBar
+  },
+  mounted() {
+    // init socket in the store
+    this.$store.dispatch('socketInit');
   }
 }
 </script>

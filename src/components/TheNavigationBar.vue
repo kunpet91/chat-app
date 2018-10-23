@@ -2,9 +2,11 @@
   <nav class="navigation">
       <router-link tag="button"
                    class="navigation__item btn btn--blue"
-                   v-for="link in links" 
-                   v-bind:key="link.id"
-                   :to="`${link.page}`">{{link.text}}</router-link>
+                   v-for="tab in tabs" 
+                   v-bind:key="tab.id"
+                   :to="`${tab.url}`">
+                   <span v-on:click="onTabClicked(tab.text)">{{tab.text}}</span>
+      </router-link>
   </nav>
 </template>
 
@@ -13,23 +15,28 @@ export default {
   name: 'TheNavigationBar',
   data() {
     return {
-      links: [
+      tabs: [
         {
           id: 0,
           text: 'Chat',
-          page:'/'
+          url:'/'
         },
         {
           id: 1,
           text: 'Photos',
-          page:'/photos'
+          url:'/photos'
         },
         {
           id: 2,
           text: 'Settings',
-          page:'/settings'
+          url:'/settings'
         }
       ]
+    }
+  },
+  methods: {
+    onTabClicked(tab) {
+      this.$store.commit('setActiveTab', tab);
     }
   }
 }

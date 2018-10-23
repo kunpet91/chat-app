@@ -28,34 +28,36 @@
 
 <script>
 
-import io from 'socket.io-client';
-
 export default {
   name: 'ChatComponent',
     data() {
         return {
             user: this.$store.state.nickName,
             message: '',
-            messages: [],
-            socket : io('https://frontend-test-server.prmrgt.com/'),
             chatBoxElement: null
         }
     },
+    computed: {
+      messages() {
+        return this.$store.state.messages;
+      }
+    },
     methods: {
-        sendMessage(e) {
-            e.preventDefault();
-
+        sendMessage() {
             const data = {
                 user: this.user,
                 message: this.message,
                 type: 'sent'             
             };
-            
-            this.socket.emit('message', data);
+
+            this.$store.dispatch('sendNewMessage', data);
             this.message = '';
-            this.messages = [...this.messages, data];
           
-            // scroll to the bottom in when new message is sent
+            // scroll to the bottom when new message is sent
+            this.scrollDownToNewestMessages();
+
+        },
+        scrollDownToNewestMessages() {
             let chatBoxElement = this.chatBoxElement;
             setTimeout(() => {
               chatBoxElement.scrollTop = chatBoxElement.scrollHeight - chatBoxElement.clientHeight; 
@@ -64,9 +66,9 @@ export default {
     },
     mounted() {
         this.chatBoxElement = document.querySelector('.chat__box');
-        this.socket.on('message', (data) => {
-            this.messages.push(Object.assign(data, {type: 'received'}));
-        });
+
+        // scroll down to the newest messages when component is mounted
+        this.scrollDownToNewestMessages();
     }
 }
 </script>
