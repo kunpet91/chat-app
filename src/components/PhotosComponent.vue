@@ -104,6 +104,7 @@ export default {
   @import "../scss/_buttons.scss";
   @import "../scss/_mixin.scss";
   .photos {
+    user-select: none; 
     position: relative;
     width: 100%;
     height: 100%;

@@ -141,6 +141,7 @@ export default {
 <style lang="scss">
 
   .settings {
+    user-select: none;
     overflow-y: auto;
     height: 100%;
     &__container {
