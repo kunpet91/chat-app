@@ -59,13 +59,13 @@ export default {
             let chatBoxElement = this.chatBoxElement;
             setTimeout(() => {
               chatBoxElement.scrollTop = chatBoxElement.scrollHeight - chatBoxElement.clientHeight; 
-            }, 100);          
+            }, 100);
         }
     },
     mounted() {
         this.chatBoxElement = document.querySelector('.chat__box');
         this.socket.on('message', (data) => {
-            this.messages = [...this.messages, Object.assign(data, {type: 'received'})];
+            this.messages.push(Object.assign(data, {type: 'received'}));
         });
     }
 }
@@ -74,16 +74,16 @@ export default {
   .chat {
     height: 100%;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     &__box {
       flex-grow: 1;
-      overflow-y: auto;      
+      overflow-y: auto;
       &__messages {
-        padding: 20px;       
-        &__message {     
-          margin-bottom: 10px; 
+        padding: 20px;
+        &__message {
+          margin-bottom: 10px;
           &--sent {
-            text-align: right;        
+            text-align: right;
           }
           &--received {
             text-align: left;
@@ -94,7 +94,8 @@ export default {
           &__text {
             display: inline-block;
             border-radius: 4px;
-            padding: 4px 6px;        
+            padding: 4px 6px;
+            max-width: 80%; 
             &--sent {
               background-color: #9cd7ff;      
             }
