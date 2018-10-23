@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client'
+import Router from 'vue-router'
 
 Vue.use(Vuex)
 
@@ -15,11 +16,17 @@ export default new Vuex.Store({
     activeIndex: 0,
     messages: [],
     socket : io('https://frontend-test-server.prmrgt.com/'),
-    activeTab: 'Chat'
+    hasNewMessage: false,
+    activeTab: ''
   },
   actions: {
     socketInit(context) {
       context.state.socket.on('message', (data) => {
+
+        if (context.state.activeTab !== 'chat') {
+          context.commit('setHasNewMessage', true);
+        }
+
         context.commit('storeNewMessage',
                Object.assign(data, {type: 'received'}));
       });  
@@ -30,8 +37,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setActiveTab(state, tab) {
+      state.activeTab = tab;
+    },
     storeNewMessage(state, message) {
       state.messages = [...state.messages, message];
+    },
+    setHasNewMessage(state, value) {
+      state.hasNewMessage = value;
     },
     updateNickName(state, name) {
       state.nickName = name;
@@ -53,9 +66,6 @@ export default new Vuex.Store({
     },
     updateCarouselHeight(state, height) {
       state.carouselHeight = height;
-    },
-    setActiveTab(store, tab) {
-      store.activeTab = tab;
     }
   }
 })

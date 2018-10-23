@@ -2,11 +2,11 @@
   <nav class="navigation">
       <router-link tag="button"
                    class="navigation__item btn btn--blue"
+                   v-bind:class="{'btn--blinking': tab.id == 'chat' && hasNewMessage}"
                    v-for="tab in tabs" 
                    v-bind:key="tab.id"
-                   :to="`${tab.url}`">
-                   <span v-on:click="onTabClicked(tab.text)">{{tab.text}}</span>
-      </router-link>
+                   v-on:click.native="onTabClick(tab.id)"
+                   :to="`${tab.url}`">{{tab.text}}</router-link>
   </nav>
 </template>
 
@@ -17,17 +17,17 @@ export default {
     return {
       tabs: [
         {
-          id: 0,
+          id: 'chat',
           text: 'Chat',
           url:'/'
         },
         {
-          id: 1,
+          id: 'photos',
           text: 'Photos',
           url:'/photos'
         },
         {
-          id: 2,
+          id: 'settings',
           text: 'Settings',
           url:'/settings'
         }
@@ -35,9 +35,14 @@ export default {
     }
   },
   methods: {
-    onTabClicked(tab) {
+    onTabClick(tab) {
       this.$store.commit('setActiveTab', tab);
     }
+  },
+  computed: {
+      hasNewMessage() {
+        return this.$store.state.hasNewMessage;
+      }
   }
 }
 </script>

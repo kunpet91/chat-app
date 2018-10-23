@@ -65,8 +65,10 @@ export default {
         }
     },
     mounted() {
+        // set flag to false when chat is loaded
+        this.$store.commit('setHasNewMessage', false);
+      
         this.chatBoxElement = document.querySelector('.chat__box');
-
         // scroll down to the newest messages when component is mounted
         this.scrollDownToNewestMessages();
     }

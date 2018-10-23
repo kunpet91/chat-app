@@ -21,6 +21,8 @@ export default {
   mounted() {
     // init socket in the store
     this.$store.dispatch('socketInit');
+    // store current tab
+    this.$store.commit('setActiveTab', this.$route.name);
   }
 }
 </script>

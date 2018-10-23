@@ -11,17 +11,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ChatComponent',
+      name: 'chat',
       component: ChatComponent
     },
     {
       path: '/photos',
-      name: 'PhotosComponent',
+      name: 'photos',
       component: PhotosComponent
     },
     {
       path: '/settings',
-      name: 'SettingsComponent',
+      name: 'settings',
       component: SettingsComponent
     }
   ]
