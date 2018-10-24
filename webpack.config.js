@@ -40,17 +40,14 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // extract scss files from vue components into style.css
-            'scss': process.env.NODE_ENV === 'production' ?
-              ExtractTextPlugin.extract({
-                use: 'css-loader',
-                fallback: 'vue-style-loader'
-              }) : [
-                'vue-style-loader',
-                'css-loader',
-                'sass-loader'          
-              ]
-            ,
+            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+            // the "scss" and "sass" values for the lang attribute to the right configs here.
+            // other preprocessors should work out of the box, no loader config like this necessary.
+            'scss': [
+              'vue-style-loader',
+              'css-loader',
+              'sass-loader'
+            ],
             'sass': [
               'vue-style-loader',
               'css-loader',
