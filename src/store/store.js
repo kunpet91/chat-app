@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client'
-import Router from 'vue-router'
+import { socketUri } from '../other/urls.js'
 
 Vue.use(Vuex)
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
     images: [],
     activeIndex: 0,
     messages: [],
-    socket : io('https://frontend-test-server.prmrgt.com/'),
+    socket : io(socketUri),
     hasNewMessage: false,
     activeTab: ''
   },

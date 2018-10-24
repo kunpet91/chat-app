@@ -33,10 +33,15 @@ import Vue2TouchEvents from 'vue2-touch-events'
 // v-touch:swipe.left
 // v-touch:swipe.right
 
+// import the photos URI
+import { photosUri } from '../other/urls.js'
+
 Vue.use(Vue2TouchEvents)
 
 export default {
   name: 'PhotosComponent',
+  // computed could have been used, but these values won't change from other source,
+  // so I just loaded them from the store in the data()
   data() {
     return {
       width: this.$store.state.photoWidth,
@@ -45,12 +50,23 @@ export default {
       activeIndex: this.$store.state.activeIndex,
       carouselWidth: this.$store.state.carouselWidth,
       carouselHeight: this.$store.state.carouselHeight,
-      photosUrl: 'https://picsum.photos/'
+      photosUrl: photosUri
     }
   },
   methods: {
     // it will push a new photo item into the images array with the given width/height
-    // I used picsum for the photo because the lorempixel was always down
+    // I used picsum for the photos because lorempixel was always down
+    // Note:
+    // Basic idea was to use a HTTP service (axios) to fetch the photos,
+    // but I hadn't got permission or had CORS rejections,
+    // so I just stored the images based on the URLs.
+    // I put the a pseudo code of the basic idea in a comment
+
+    // getNewImage() {
+    //   this.$http.get(url).then((response) => {
+    //     store image data based on the response in this.images
+    //   })
+    // },
     getNewImage() {
       this.images.push({
         id: this.images.length,
