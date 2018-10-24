@@ -119,6 +119,7 @@ export default {
 </script>
 <style scoped lang="scss">
   @import "../scss/_mixin.scss";
+  @import "../scss/_colors.scss";
   .photos {
     user-select: none; 
     position: relative;
@@ -126,7 +127,7 @@ export default {
     height: 100%;
     &__carousel {
       position: relative;
-      background-color: #f3f3f3;
+      background-color: $carouselBg;
       height: 100%;
       width: 100%;
       margin: 0 auto;

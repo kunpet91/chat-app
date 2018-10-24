@@ -29,9 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "./scss/reset.scss";
-  @import "./scss/_buttons.scss";
-  @import "./scss/_other-elements.scss";
+  @import "./scss/_styles.scss";
   .application {
     height: 100%;
     display: flex;
@@ -41,7 +39,7 @@ export default {
     }
     &__view {
       height: calc(100% - 40px);
-      background-color: #f8fcff;
+      background-color: $appBg;
     }
     &__nav, &__view {
       position: relative;

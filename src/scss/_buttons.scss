@@ -1,5 +1,3 @@
-$buttonBlue: #3498db;
-
 .btn {
     text-align: center;
     font-size: 14px;
@@ -9,8 +7,8 @@ $buttonBlue: #3498db;
     outline: none;
     border: none;
     &--blue {
-        background-color: $buttonBlue;
-        color: white;
+        background-color: $appBlue;
+        color: $white;
     }
     &:disabled {
         opacity: 0.5;

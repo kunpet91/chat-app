@@ -144,15 +144,19 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+  @import "../scss/_colors.scss";
   .settings {
     user-select: none;
     overflow-y: auto;
     height: 100%;
+    background-image: url('../assets/settings_alpha.png');
+    background-repeat: repeat;
+    background-size: 80%;    
     &__container {
+      z-index: 2;
       padding: 0 4%;
       &__accordion {
-        border: 2px solid #3498db;
+        border: 2px solid $appBlue;
         border-radius: 16px;
         padding: 8px;
         margin: 24px 0;
@@ -160,7 +164,7 @@ export default {
           position: relative;
           font-size: 24px;
           font-weight: bold;
-          color: #797979;
+          color: $textColor;
           cursor: pointer;
           .arrow {
             position: absolute;
@@ -175,17 +179,22 @@ export default {
           padding: 8px;
           &__text {
             font-size: 18px;
-            color: #797979;
+            color: $textColor;
             &__inner {
-              color: #3498db;
+              color: $appBlue;
             }          
           }
           &__input {
             display: block;
             margin-top: 8px;
-            border: 2px solid #3498db;
+            border: 2px solid $appBlue;
             padding: 4px;
             border-radius: 8px;
+            color: $textColor;
+            max-width: 100%;
+          }
+          .vue-slider-component {
+            cursor: pointer;
           }
         }
       }      

@@ -50,6 +50,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+  @import "../scss/_colors.scss";
   .navigation {
     width: 100%;
     display: flex;
@@ -57,9 +58,9 @@ export default {
       height: 100%;
       flex-grow: 1;
       flex-basis: 0;
-      border: 1px solid #0061a2;
+      border: 1px solid $appBlueDark;
       &.router-link-exact-active {
-        background-color: #0061a2;
+        background-color: $appBlueDark;
       }
     }
   }

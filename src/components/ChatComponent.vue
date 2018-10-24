@@ -78,6 +78,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+  @import "../scss/_colors.scss";
   .chat {
     height: 100%;
     display: flex;
@@ -104,15 +105,15 @@ export default {
             padding: 4px 6px;
             max-width: 80%; 
             &--sent {
-              background-color: #9cd7ff;      
+              background-color: $textSentBg;      
             }
             &--received {
-              background-color: #f1f1f1;  
+              background-color: $textReceivedBg;  
             }                  
           }
           &__user, &__text {
             font-size: 18px;
-            color: #353535;
+            color: $textColor;
           }
         }
       }
