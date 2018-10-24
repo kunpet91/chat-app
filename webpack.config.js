@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -9,9 +10,6 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'Chat app'
-  })],
   module: {
     rules: [
       {
@@ -42,14 +40,17 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader'
-            ],
+            // extract scss files from vue components into style.css
+            'scss': process.env.NODE_ENV === 'production' ?
+              ExtractTextPlugin.extract({
+                use: 'css-loader',
+                fallback: 'vue-style-loader'
+              }) : [
+                'vue-style-loader',
+                'css-loader',
+                'sass-loader'          
+              ]
+            ,
             'sass': [
               'vue-style-loader',
               'css-loader',
@@ -73,6 +74,12 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Chat app'
+    }),
+    new ExtractTextPlugin("style.css")
+  ],  
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
